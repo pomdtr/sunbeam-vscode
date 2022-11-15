@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/pomdtr/sunbeam/main/schemas/schema.json
+name: vscode
+version: "1.0"
+title: Visual Studio Code
+entrypoints:
+  - type: push-page
+    title: List Recent Projects
+    page: list-recent-projects
+pages:
+  list-recent-projects:
+    mode: filter
+    command: ./recent-projects.py
