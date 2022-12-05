@@ -4,6 +4,8 @@ title: Visual Studio Code
 requirements:
   - which: code
     homePage: https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line
+  - which: python3
+    homePage: https://www.python.org/downloads/
 rootItems:
   - title: List Recent Projects
     script: listRecentProjects
