@@ -11,8 +11,5 @@ rootItems:
     script: listRecentProjects
 scripts:
   listRecentProjects:
+    mode: filter
     command: ./recent-projects.py
-    output: page
-    page:
-      type: list
-      mode: generator
