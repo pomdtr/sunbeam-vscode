@@ -1,6 +1,9 @@
 name: vscode
 version: "1.0"
 title: Visual Studio Code
+requirements:
+  - which: code
+    homePage: https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line
 rootItems:
   - title: List Recent Projects
     script: listRecentProjects

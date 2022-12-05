@@ -43,10 +43,11 @@ for project in projects:
                 "subtitle": str(path),
                 "actions": [
                     {
-                        "type": "openUrl",
+                        "type": "execCommand",
                         "title": "Open Project",
-                        "application": "Visual Studio Code",
-                        "url": project["folderUri"],
+                        "command": f"code {path}",
+                        "silent": True,
+                        "onSuccess": "exit"
                     }
                 ],
             }
