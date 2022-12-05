@@ -3,6 +3,7 @@
 import json
 import pathlib
 import sqlite3
+import urllib.parse
 
 db = (
     pathlib.Path.home()
@@ -27,24 +28,22 @@ res = c.fetchone()
 projects = json.loads(res[0])
 
 for project in projects:
-    if "label" not in project:
-        continue
     if "folderUri" not in project:
         continue
-    folderUri: str = project["folderUri"]
-    if not folderUri.startswith("file://"):
+    uri = urllib.parse.urlparse(project["folderUri"])
+    if uri.scheme != "file":
         continue
 
-    title = folderUri.split("/")[-1]
+    path = pathlib.Path(urllib.parse.unquote(uri.path))
 
     print(
         json.dumps(
             {
-                "title": title,
-                "subtitle": project["label"],
+                "title": path.name,
+                "subtitle": str(path),
                 "actions": [
                     {
-                        "type": "open-url",
+                        "type": "openUrl",
                         "title": "Open Project",
                         "application": "Visual Studio Code",
                         "url": project["folderUri"],
