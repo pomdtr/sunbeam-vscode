@@ -8,8 +8,8 @@ requirements:
     homePage: https://www.python.org/downloads/
 rootItems:
   - title: List Recent Projects
-    script: listRecentProjects
+    script: list-recent-projects
 scripts:
-  listRecentProjects:
+  list-recent-projects:
     mode: filter
     command: ./recent-projects.py
