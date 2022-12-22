@@ -43,7 +43,7 @@ for project in projects:
                 "subtitle": str(path),
                 "actions": [
                     {
-                        "type": "execCommand",
+                        "type": "exec-command",
                         "title": "Open Project",
                         "command": f"code {path}",
                         "silent": True,
