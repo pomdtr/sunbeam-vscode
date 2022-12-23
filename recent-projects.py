@@ -35,6 +35,7 @@ for project in projects:
         continue
 
     path = pathlib.Path(urllib.parse.unquote(uri.path))
+    uri = f"vscode://file{path}"
 
     print(
         json.dumps(
@@ -43,11 +44,10 @@ for project in projects:
                 "subtitle": str(path),
                 "actions": [
                     {
-                        "type": "exec-command",
+                        "type": "open-url",
                         "title": "Open Project",
-                        "command": f"code {path}",
+                        "url": uri,
                         "silent": True,
-                        "onSuccess": "exit"
                     }
                 ],
             }
