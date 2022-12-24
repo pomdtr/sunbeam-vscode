@@ -2,14 +2,12 @@ name: vscode
 version: "1.0"
 title: Visual Studio Code
 requirements:
-  - which: code
-    homePage: https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line
-  - which: python3
-    homePage: https://www.python.org/downloads/
+  - which: sqlite3
+    homePage: https://www.sqlite.org/download.html
 rootItems:
   - title: List Recent Projects
     script: list-recent-projects
 scripts:
   list-recent-projects:
     mode: filter
-    command: ./recent-projects.py
+    command: sunbeam exec main.go
