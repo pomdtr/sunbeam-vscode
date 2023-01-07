@@ -60,8 +60,8 @@ func main() {
 			},
 			"actions": []map[string]any{
 				{
-					"type": "open-url",
-					"url":  entryUri.String(),
+					"type":   "open",
+					"target": entryUri.String(),
 				},
 			},
 		})
