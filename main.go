@@ -34,7 +34,7 @@ func main() {
 	var recents []Project
 	json.Unmarshal(db, &recents)
 
-	encoder := json.NewEncoder(os.Stdout)
+	items := make([]map[string]any, 0)
 	for _, recent := range recents {
 		if recent.FolderUri == "" {
 			continue
@@ -53,17 +53,24 @@ func main() {
 
 		cleanPath := strings.Replace(folderUri.Path, os.Getenv("HOME"), "~", 1)
 
-		encoder.Encode(map[string]any{
+		item := (map[string]any{
 			"title": path.Base(folderUri.Path),
 			"accessories": []string{
 				cleanPath,
 			},
 			"actions": []map[string]any{
 				{
-					"type":   "open",
-					"target": entryUri.String(),
+					"type": "open-url",
+					"url":  entryUri.String(),
 				},
 			},
 		})
+
+		items = append(items, item)
 	}
+
+	json.NewEncoder(os.Stdout).Encode(map[string]any{
+		"type":  "list",
+		"items": items,
+	})
 }

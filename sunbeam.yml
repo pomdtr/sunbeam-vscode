@@ -1,12 +1,14 @@
 version: "1.0"
 title: Visual Studio Code
 requirements:
+  - which: go
+    homePage: https://golang.org/dl/
   - which: sqlite3
     homePage: https://www.sqlite.org/download.html
 rootItems:
   - title: List Recent Projects
-    script: list-recent-projects
-scripts:
+    command: list-recent-projects
+commands:
   list-recent-projects:
-    mode: filter
-    command: sunbeam exec main.go
+    onSuccess: push-page
+    exec: go run main.go
