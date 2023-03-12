@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+DIRNAME=$(dirname "$0")
+
 # check if go is installed
 if ! command -v go &> /dev/null
 then
@@ -7,4 +9,4 @@ then
     exit
 fi
 
-go run main.go
+go run "$DIRNAME/main.go"
