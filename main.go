@@ -41,7 +41,6 @@ func main() {
 		}
 		folderUri, err := url.Parse(recent.FolderUri)
 		if err != nil {
-			fmt.Fprintln(os.Stderr, err)
 			continue
 		}
 
@@ -60,8 +59,8 @@ func main() {
 			},
 			"actions": []map[string]any{
 				{
-					"type": "open-url",
-					"url":  entryUri.String(),
+					"type":   "open",
+					"target": entryUri.String(),
 				},
 			},
 		})
