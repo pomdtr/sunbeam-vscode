@@ -1,3 +1,10 @@
 #!/usr/bin/env bash
 
+# check if go is installed
+if ! command -v go &> /dev/null
+then
+    echo "go is required to run this extension"
+    exit
+fi
+
 go run main.go
