@@ -59,8 +59,8 @@ func main() {
 			},
 			"actions": []map[string]any{
 				{
-					"type":   "open",
-					"target": entryUri.String(),
+					"type": "open",
+					"url":  entryUri.String(),
 				},
 			},
 		})
