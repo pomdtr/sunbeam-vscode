@@ -8,6 +8,8 @@ import (
 	"os/exec"
 	"path"
 	"strings"
+
+	sunbeam "github.com/pomdtr/sunbeam/types"
 )
 
 const QUERY = "SELECT json_extract(value, '$.entries') as entries FROM ItemTable WHERE key = 'history.recentlyOpenedPathsList'"
@@ -34,7 +36,7 @@ func main() {
 	var recents []Project
 	json.Unmarshal(db, &recents)
 
-	items := make([]map[string]any, 0)
+	items := make([]sunbeam.ListItem, 0)
 	for _, recent := range recents {
 		if recent.FolderUri == "" {
 			continue
@@ -52,24 +54,25 @@ func main() {
 
 		cleanPath := strings.Replace(folderUri.Path, os.Getenv("HOME"), "~", 1)
 
-		item := (map[string]any{
-			"title": path.Base(folderUri.Path),
-			"accessories": []string{
+		item := sunbeam.ListItem{
+			Title: path.Base(folderUri.Path),
+			Accessories: []string{
 				cleanPath,
 			},
-			"actions": []map[string]any{
+			Actions: []sunbeam.Action{
 				{
-					"type": "open",
-					"url":  entryUri.String(),
+					Title: "Open",
+					Type:  sunbeam.OpenAction,
+					Url:   entryUri.String(),
 				},
 			},
-		})
+		}
 
 		items = append(items, item)
 	}
 
-	json.NewEncoder(os.Stdout).Encode(map[string]any{
-		"type":  "list",
-		"items": items,
+	json.NewEncoder(os.Stdout).Encode(sunbeam.Page{
+		Type:  sunbeam.ListPage,
+		Items: items,
 	})
 }
