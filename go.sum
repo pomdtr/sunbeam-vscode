@@ -1,5 +1,13 @@
+github.com/google/shlex v0.0.0-20191202100458-e7afc7fbc510 h1:El6M4kTTCOh6aBiKaUGG7oYTSPP8MxqL4YI3kZKwcP4=
+github.com/google/shlex v0.0.0-20191202100458-e7afc7fbc510/go.mod h1:pupxD2MaaD3pAXIBCelhxNneeOaAeabZDe5s4K6zSpQ=
+github.com/mitchellh/mapstructure v1.5.0 h1:jeMsZIYE/09sWLaz43PL7Gy6RuMjD2eJVyuac5Z2hdY=
+github.com/mitchellh/mapstructure v1.5.0/go.mod h1:bFUtVrKA4DC2yAKiSyO/QUcy7e+RRV2QTWOzhPopBRo=
 github.com/pomdtr/sunbeam v0.6.1 h1:Rs/GqrKngpvHZJ+gSmvBkjfmUfTvTxH0orThNRheAzc=
 github.com/pomdtr/sunbeam v0.6.1/go.mod h1:NDWP3VuDanDEMxOx2vu7Pd4AkNxat3sBXMNFPCGPeh0=
+github.com/pomdtr/sunbeam v0.8.0 h1:TkEmkrEpEPr4YHnOx4ZyIohyKXbqrTkJGMgO4OzhfmI=
+github.com/pomdtr/sunbeam v0.8.0/go.mod h1:8/FksIYsua2TPZtMatmVVAjh2h/K1c5xIcWpUbKkwrM=
+github.com/pomdtr/sunbeam v0.9.10 h1:QWBUz9kMTCuws6/qqFfvTpz+T3cZkvWo04GoucJ1VU8=
+github.com/pomdtr/sunbeam v0.9.10/go.mod h1:EADwxHlNXdGjRIkExQ2C7a1r+otoL5wXdgRYSTK4HYY=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405 h1:yhCVgyC4o1eVCa2tZl7eS0r+SDo693bJlVdllGtEeKM=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
 gopkg.in/yaml.v3 v3.0.1 h1:fxVm/GzAzEWqLHuvctI91KS9hhNmmWOoWu0XTYJS7CA=

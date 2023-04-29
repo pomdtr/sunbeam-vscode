@@ -61,9 +61,9 @@ func main() {
 			},
 			Actions: []sunbeam.Action{
 				{
-					Title: "Open",
-					Type:  sunbeam.OpenAction,
-					Url:   entryUri.String(),
+					Title:  "Open",
+					Type:   sunbeam.OpenAction,
+					Target: entryUri.String(),
 				},
 			},
 		}
