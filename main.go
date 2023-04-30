@@ -7,6 +7,7 @@ import (
 	"os"
 	"os/exec"
 	"path"
+	"runtime"
 	"strings"
 
 	sunbeam "github.com/pomdtr/sunbeam/types"
@@ -21,13 +22,33 @@ type Project struct {
 	RemoteAuthority string `json:"remoteAuthority"`
 }
 
-func getDatabasePath() string {
-	homeDir := os.Getenv("HOME")
-	return path.Join(homeDir, "Library", "Application Support", "Code", "User", "globalStorage", "state.vscdb")
+func getDatabasePath(homeDir string) (string, bool) {
+
+	switch runtime.GOOS {
+	case "darwin":
+		return path.Join(homeDir, "Library", "Application Support", "Code", "User", "globalStorage", "state.vscdb"), true
+	case "linux":
+		return path.Join(homeDir, ".config", "Code", "User", "globalStorage", "state.vscdb"), true
+	case "windows":
+		return path.Join(homeDir, "AppData", "Roaming", "Code", "User", "globalStorage", "state.vscdb"), true
+	default:
+		return "", false
+	}
 }
 
 func main() {
-	dbPath := getDatabasePath()
+	homeDir, err := os.UserHomeDir()
+	if err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
+
+	dbPath, ok := getDatabasePath(homeDir)
+	if !ok {
+		fmt.Fprintln(os.Stderr, "Unsupported OS")
+		os.Exit(1)
+	}
+
 	db, err := exec.Command("sqlite3", dbPath, QUERY).Output()
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
@@ -52,7 +73,7 @@ func main() {
 			Path:   folderUri.Path,
 		}
 
-		cleanPath := strings.Replace(folderUri.Path, os.Getenv("HOME"), "~", 1)
+		cleanPath := strings.Replace(folderUri.Path, homeDir, "~", 1)
 
 		item := sunbeam.ListItem{
 			Title: path.Base(folderUri.Path),
@@ -60,11 +81,7 @@ func main() {
 				cleanPath,
 			},
 			Actions: []sunbeam.Action{
-				{
-					Title:  "Open",
-					Type:   sunbeam.OpenAction,
-					Target: entryUri.String(),
-				},
+				sunbeam.NewOpenAction("Open", entryUri.String()),
 			},
 		}
 
