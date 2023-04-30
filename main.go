@@ -1,16 +1,17 @@
 package main
 
 import (
+	"database/sql"
 	"encoding/json"
 	"fmt"
 	"net/url"
 	"os"
-	"os/exec"
 	"path"
 	"runtime"
 	"strings"
 
 	sunbeam "github.com/pomdtr/sunbeam/types"
+	_ "modernc.org/sqlite"
 )
 
 const QUERY = "SELECT json_extract(value, '$.entries') as entries FROM ItemTable WHERE key = 'history.recentlyOpenedPathsList'"
@@ -23,7 +24,6 @@ type Project struct {
 }
 
 func getDatabasePath(homeDir string) (string, bool) {
-
 	switch runtime.GOOS {
 	case "darwin":
 		return path.Join(homeDir, "Library", "Application Support", "Code", "User", "globalStorage", "state.vscdb"), true
@@ -49,13 +49,26 @@ func main() {
 		os.Exit(1)
 	}
 
-	db, err := exec.Command("sqlite3", dbPath, QUERY).Output()
+	conn, err := sql.Open("sqlite", dbPath+"?mode=ro")
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 	}
+	defer conn.Close()
+
+	row := conn.QueryRow(QUERY)
+
+	var data []byte
+	if err = row.Scan(&data); err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
+
 	var recents []Project
-	json.Unmarshal(db, &recents)
+	if err := json.Unmarshal(data, &recents); err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
 
 	items := make([]sunbeam.ListItem, 0)
 	for _, recent := range recents {
