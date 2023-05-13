@@ -102,6 +102,7 @@ func main() {
 	}
 
 	json.NewEncoder(os.Stdout).Encode(sunbeam.Page{
+		Title: "Recent Projects",
 		Type:  sunbeam.ListPage,
 		Items: items,
 	})
