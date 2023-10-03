@@ -1,3 +1,23 @@
-# sunbeam-vscode
+# Search Recents VS Code Project
 
-Visual Studio Code Extension for Sunbeam
+## Requirements
+
+- [deno](https://deno.com)
+
+## Installation
+
+```sh
+sunbeam extension install https://github.com/pomdtr/sunbeam-vscode
+```
+
+## Usage
+
+```sh
+sunbeam vscode
+```
+
+## Code
+
+```typescript
+{{#include ./vscode.ts}}
+```
