@@ -13,7 +13,7 @@ sunbeam extension install https://github.com/pomdtr/sunbeam-vscode
 ## Usage
 
 ```sh
-sunbeam vscode
+sunbeam vscode list-project # List all projects
 ```
 
 ## Code
