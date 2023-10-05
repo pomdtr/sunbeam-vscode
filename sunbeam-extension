@@ -6,7 +6,6 @@ import * as fs from "https://deno.land/std@0.203.0/fs/mod.ts";
 if (Deno.args.length === 0) {
   console.log(JSON.stringify({
     title: "VS Code",
-    root: "list-projects",
     commands: [
       {
         name: "list-projects",
