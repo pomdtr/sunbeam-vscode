@@ -15,12 +15,12 @@ if (Deno.args.length == 1 && Deno.args[0] == "manifest") {
 }
 
 import { DB } from "https://deno.land/x/sqlite@v3.8/mod.ts";
-import { toArrayBuffer } from "https://deno.land/std@0.203.0/streams/mod.ts";
 import * as fs from "https://deno.land/std@0.203.0/fs/mod.ts";
+import { toJson } from "https://deno.land/std@0.203.0/streams/mod.ts";
 
-const { command } = JSON.parse(
-  new TextDecoder().decode(await toArrayBuffer(Deno.stdin.readable)),
-);
+const { command } = await toJson(Deno.stdin.readable) as {
+  command: string;
+};
 
 if (command == "list-projects") {
   const homedir = Deno.env.get("HOME");
