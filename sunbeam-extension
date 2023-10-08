@@ -1,6 +1,6 @@
 #!/usr/bin/env -S deno run -A --ext=ts
 
-if (Deno.args.length == 1 && Deno.args[0] == "manifest") {
+if (Deno.args.length == 0) {
   console.log(JSON.stringify({
     title: "VS Code",
     commands: [
@@ -16,13 +16,8 @@ if (Deno.args.length == 1 && Deno.args[0] == "manifest") {
 
 import { DB } from "https://deno.land/x/sqlite@v3.8/mod.ts";
 import * as fs from "https://deno.land/std@0.203.0/fs/mod.ts";
-import { toJson } from "https://deno.land/std@0.203.0/streams/mod.ts";
 
-const { command } = await toJson(Deno.stdin.readable) as {
-  command: string;
-};
-
-if (command == "list-projects") {
+if (Deno.args[0] == "list-projects") {
   const homedir = Deno.env.get("HOME");
   const db = new DB(
     `${homedir}/Library/Application Support/Code/User/globalStorage/state.vscdb`,
