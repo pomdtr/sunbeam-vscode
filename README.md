@@ -7,7 +7,7 @@
 ## Installation
 
 ```sh
-sunbeam extension install https://github.com/pomdtr/sunbeam-vscode
+sunbeam extension install github:pomdtr/sunbeam-vscode
 ```
 
 ## Usage
