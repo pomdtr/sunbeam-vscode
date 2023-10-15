@@ -52,8 +52,7 @@ if (Deno.args[0] == "list-projects") {
           type: "open",
           target: entry.folderUri,
           app: {
-            name: "Visual Studio Code",
-            platform: "mac",
+            mac: "Visual Studio Code",
           },
           exit: true,
         },
