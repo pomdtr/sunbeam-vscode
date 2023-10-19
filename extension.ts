@@ -1,9 +1,10 @@
 #!/usr/bin/env -S deno run -A
 import { DB } from "https://deno.land/x/sqlite@v3.8/mod.ts";
 import * as fs from "https://deno.land/std@0.203.0/fs/mod.ts";
+import type * as sunbeam from "npm:sunbeam-types@0.22.13";
 
 if (Deno.args.length == 0) {
-  console.log(JSON.stringify({
+  const manifest: sunbeam.Manifest = {
     title: "VS Code",
     commands: [
       {
@@ -12,7 +13,8 @@ if (Deno.args.length == 0) {
         mode: "view",
       },
     ],
-  }));
+  };
+  console.log(JSON.stringify(manifest));
   Deno.exit(0);
 }
 
@@ -40,7 +42,7 @@ if (Deno.args[0] == "list-projects") {
     return true;
   });
 
-  const items = entries.map((entry) => ({
+  const items: sunbeam.ListItem[] = entries.map((entry) => ({
     title: entry.folderUri.split("/").pop(),
     accessories: [
       entry.folderUri.replace("file://", "").replace(homedir, "~"),
@@ -74,10 +76,9 @@ if (Deno.args[0] == "list-projects") {
     ],
   }));
 
+  const list: sunbeam.List = { type: "list", items };
+
   console.log(
-    JSON.stringify({
-      type: "list",
-      items,
-    }),
+    JSON.stringify(list),
   );
 }
